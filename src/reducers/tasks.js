@@ -14,7 +14,7 @@ const tasks = (state = [], action) => {
     case REMOVE_TASK:
       return state.filter(task => task.id !== id)
     case ADD_TIME:
-      return state.map((task, index) => index === 0 ? Object.assign({}, task, {time: task.time + 1}) : task)
+      return state.map((task, index) => index === 0 ? Object.assign({}, task, {progress: task.progress + 1}) : task)
     default:
       return state
   }

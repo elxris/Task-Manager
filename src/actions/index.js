@@ -6,7 +6,9 @@ export const addTask = ({title, description, time}) => ({
   id: uuid(),
   title,
   description,
-  time
+  time,
+  progress: 0,
+  finished: false
 })
 
 export const EDIT_TASK = 'EDIT_TASK'
@@ -54,4 +56,38 @@ export const stopTimer = timer => ({
 export const ADD_TIME = 'ADD_TIME'
 export const addTime = () => ({
   type: ADD_TIME
+})
+
+export const OPEN_ADD_DIALOG = 'OPEN_ADD_DIALOG'
+export const CLOSER_ADD_DIALOG = 'CLOSER_ADD_DIALOG'
+export const EDIT_ADD_DIALOG = 'EDIT_ADD_DIALOG'
+export const openAddDialog = ({ create = true, id, title, description, time }) => ({
+  type: OPEN_ADD_DIALOG,
+  create,
+  id,
+  title,
+  description,
+  time
+})
+export const closeAddDialog = ({ save = false }) => ({
+  type: CLOSER_ADD_DIALOG,
+  save
+})
+export const editAddDialog = ({id, title, description, time}) => ({
+  type: EDIT_ADD_DIALOG,
+  id,
+  title,
+  description,
+  time
+})
+
+export const OPEN_DELETE_CONFIRM_DIALOG = 'OPEN_DELETE_CONFIRM_DIALOG'
+export const CLOSE_DELETE_CONFIRM_DIALOG = 'CLOSE_DELETE_CONFIRM_DIALOG'
+export const openDeleteConfirmDialog = ({ id }) => ({
+  type: OPEN_DELETE_CONFIRM_DIALOG,
+  id
+})
+export const closeDeleteConfirmDialog = ({ confirm = false }) => ({
+  type: CLOSE_DELETE_CONFIRM_DIALOG,
+  confirm
 })
