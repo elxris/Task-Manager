@@ -49,7 +49,7 @@ export const startTimer = timer => ({
   type: START_TIMER,
   timer
 })
-export const stopTimer = timer => ({
+export const stopTimer = () => ({
   type: STOP_TIMER
 })
 
@@ -61,24 +61,23 @@ export const addTime = () => ({
 export const OPEN_ADD_DIALOG = 'OPEN_ADD_DIALOG'
 export const CLOSER_ADD_DIALOG = 'CLOSER_ADD_DIALOG'
 export const EDIT_ADD_DIALOG = 'EDIT_ADD_DIALOG'
-export const openAddDialog = ({ create = true, id, title, description, time }) => ({
+export const openAddDialog = ({ id, title, description, time } = {}) => ({
   type: OPEN_ADD_DIALOG,
-  create,
   id,
   title,
   description,
   time
 })
-export const closeAddDialog = ({ save = false }) => ({
-  type: CLOSER_ADD_DIALOG,
-  save
+export const closeAddDialog = () => ({
+  type: CLOSER_ADD_DIALOG
 })
-export const editAddDialog = ({id, title, description, time}) => ({
+export const editAddDialog = ({id, title, description, minutes, seconds}) => ({
   type: EDIT_ADD_DIALOG,
   id,
   title,
   description,
-  time
+  minutes,
+  seconds
 })
 
 export const OPEN_DELETE_CONFIRM_DIALOG = 'OPEN_DELETE_CONFIRM_DIALOG'

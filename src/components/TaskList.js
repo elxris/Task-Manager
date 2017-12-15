@@ -5,7 +5,7 @@ import Task from './Task'
 
 const TaskList = ({tasks, onTaskDelete}) => {
   return <List>
-    {tasks.map(task => <Task key={task.id} title={task.title} description={task.description} id={task.id} onTaskDelete={onTaskDelete} />)}
+    {tasks.map(task => <Task key={task.id} {...task} onTaskDelete={onTaskDelete} />)}
   </List>
 }
 

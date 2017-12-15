@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Paper, Grid } from 'material-ui'
+import { Paper, Grid, Button } from 'material-ui'
 import { MuiThemeProvider, createMuiTheme, withStyles } from 'material-ui/styles'
 import FilteredTaskList from './containers/FilteredTaskList'
-import NewTask from './containers/NewTask'
+import TaskMenu from './containers/TaskMenu'
+import AddDialog from './containers/AddDialog'
 
 const theme = createMuiTheme({
   palette: {
@@ -20,18 +21,21 @@ const styles = theme => ({
 
 class App extends Component {
   render () {
-    const { classes } = this.props;
+    const { classes } = this.props
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
+          <AddDialog />
           <Grid>
             <Paper>
-
               {/* <Header /> */}
-              <NewTask />
+              <TaskMenu />
               {/* <VisibilityFilter /> */}
               <FilteredTaskList />
             </Paper>
+            <Button>
+              Insertar 50 elementos completados
+            </Button>
           </Grid>
         </div>
       </MuiThemeProvider>
