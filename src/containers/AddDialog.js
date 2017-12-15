@@ -15,13 +15,18 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  // Sí el usuario desea guardar los cambios, se ejecuta lo siguiente:
   onDone: (dialog) => () => {
     let { id, title, description, minutes = 30, seconds = 0 } = dialog
     // If title or description is not set, then set it to empty strings and error prop will rize
     if (!title || !description) { return dispatch(editAddDialog(Object.assign({}, dialog, {title: title || '', description: description || ''}))) }
+    // If the time is invalid then it won't continue
     if (!isValidMinutes(minutes, seconds) || !isValidSeconds(minutes, seconds)) { return }
+    // Recast the numbers as integers
     minutes = parseInt(minutes, 10)
     seconds = parseInt(seconds, 10)
+
+    // New or editing a task
     if (id) {
       dispatch(editTask({ id, title, description, time: minutes * 60 + seconds }))
     } else {
@@ -29,15 +34,19 @@ const mapDispatchToProps = dispatch => ({
     }
     dispatch(closeAddDialog())
   },
+  // Edita algún campo de la ventana de diálogo
   onChange: (dialog, name) => (event) => {
     dispatch(editAddDialog(Object.assign({}, dialog, { [name]: event.target.value })))
   },
+  // Cambia el tiempo a algún valor por defecto
   onChipClick: (dialog, minutes) => () => {
     dispatch(editAddDialog(Object.assign({}, dialog, { minutes: minutes, seconds: 0 })))
   },
+  // Cierra la ventana
   onClose: () => () => dispatch(closeAddDialog())
 })
 
+// Creamos un tema especial para los Chip que recién se dieron click o el tiempo de la tarea coincide con el Chip
 const chipSelected = createMuiTheme({
   palette: {
     background: {
@@ -47,14 +56,16 @@ const chipSelected = createMuiTheme({
 })
 
 const AddDialog = ({ open, dialog, id, title, description, minutes = 30, seconds = 0, onChipClick, onDone, onChange, onClose, classes }) => {
+  // Componente que se usa en caso de que el tiempo coincida con alguna de las opciones preesablecidas. Es la manera material-ui de modificar un componente de raíz.
   const ChipSelected = ({children}) => <MuiThemeProvider theme={chipSelected}>{children}</MuiThemeProvider>
   return <Dialog open={open} onRequestClose={onClose()}>
     <DialogContent>
       <Grid container spacing={0}>
+        {/* Reúso el componente para cuando se crea o se edita una tarea */}
         <Grid item sm={3}>
           <DialogTitle>{id ? 'Editar' : 'Tarea Nueva'}</DialogTitle>
         </Grid>
-        <Grid item sm={9}>
+        <Grid item sm={9} xs={12}>
           <form noValidate autoComplete='off'>
             <Grid container spacing={8}>
               <Grid item xs={12}>

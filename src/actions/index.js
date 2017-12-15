@@ -113,3 +113,15 @@ export const closeDeleteConfirmDialog = ({ confirm = false }) => ({
   type: CLOSE_DELETE_CONFIRM_DIALOG,
   confirm
 })
+
+export const SET_DURATION_FILTER = 'SET_DURATION_FILTER'
+export const DURATION_FILTERS = {
+  SHORT: 'SHORT',
+  MEDIUM: 'MEDIUM',
+  LARGE: 'LARGE',
+  NONE: 'NONE'
+}
+export const setDurationFilter = filter => ({
+  type: SET_DURATION_FILTER,
+  filter
+})

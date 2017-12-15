@@ -10,7 +10,7 @@ const dialog = (state = {}, action) => {
       }
       return Object.assign({}, {open: true, id, title, description, minutes, seconds})
     case CLOSER_ADD_DIALOG:
-      return ({open: false})
+      return ({...state, open: false})
     case EDIT_ADD_DIALOG:
       return Object.assign({}, state, {id, title, description, minutes, seconds})
     default:

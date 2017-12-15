@@ -6,6 +6,7 @@ import FilteredTaskList from './containers/FilteredTaskList'
 import TaskMenu from './containers/TaskMenu'
 import AddDialog from './containers/AddDialog'
 import VisibilityFilter from './containers/VisibilityFilter'
+import DurationFilter from './containers/DurationFilter'
 import { addTask } from './actions'
 
 const theme = createMuiTheme({
@@ -36,7 +37,6 @@ const mapDispatchToProps = dispatch => ({
 
       // Add its to a list
       tasks.push({
-        title: `Tarea ${i + 1}`,
         description: `Lorem Ipsum Dolor ...`,
         time,
         progress: Math.ceil((0.8 + Math.random() * 0.2) * time),
@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
       })
     }
     tasks.sort((a, b) => b.finished - a.finished)
-    tasks.forEach(task => dispatch(addTask(task)))
+    tasks.forEach((task, index) => dispatch(addTask({ ...task, title: `Tarea ${index + 1}` })))
   }
 })
 
@@ -56,14 +56,18 @@ class App extends Component {
         <div className={classes.root}>
           <AddDialog />
           <Paper>
-            {/* <Header /> */}
-            <TaskMenu />
+            <DurationFilter />
+            <Divider />
             <VisibilityFilter />
             <Divider />
+            <TaskMenu />
             <FilteredTaskList />
           </Paper>
           <Button onClick={generateExampleTasks}>
             Insertar 50 elementos de prueba
+          </Button>
+          <Button onClick={() => { localStorage.removeItem('state'); window.location = '' }}>
+            Borrar todo
           </Button>
         </div>
       </MuiThemeProvider>

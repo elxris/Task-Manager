@@ -21,6 +21,7 @@ const styles = theme => ({
 })
 
 const Task = ({ classes, task, title, description, id, progress, time, finished, first, last, onTaskDelete, onTaskDone, onTaskUndone, onTaskMoveUp, onTaskMoveDown, openEditDialog }) => {
+  let percentageCompleted = Math.floor(100 * progress / time)
   return <div>
     <ListItem onClick={() => openEditDialog(task)}>
       <ListItemText primary={title} secondary={description + `\n${formatTime(progress)} / ${formatTime(time)} - ${(100 * progress / time).toFixed(2)}%${finished ? `\nTerminada ${moment(finished).fromNow()}` : ''}`} classes={{text: classes.whiteSpace}} />
@@ -34,7 +35,7 @@ const Task = ({ classes, task, title, description, id, progress, time, finished,
         </Grid>
       </ListItemSecondaryAction>
     </ListItem>
-    {finished && <LinearProgress value={Math.floor(100 * progress / time)} mode='determinate' color={finished ? 'primary' : 'accent'} />}
+    {progress ? <LinearProgress value={percentageCompleted} valueBuffer={percentageCompleted} mode={first ? 'buffer' : 'determinate'} color={finished ? 'primary' : 'accent'} /> : null}
   </div>
 }
 
