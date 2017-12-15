@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onDone: (dialog) => () => {
-    let { id, title, description, minutes, seconds } = dialog
+    let { id, title, description, minutes = 30, seconds = 0 } = dialog
     // If title or description is not set, then set it to empty strings and error prop will rize
     if (!title || !description) { return dispatch(editAddDialog(Object.assign({}, dialog, {title: title || '', description: description || ''}))) }
     if (!isValidMinutes(minutes, seconds) || !isValidSeconds(minutes, seconds)) { return }

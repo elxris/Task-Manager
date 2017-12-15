@@ -1,14 +1,15 @@
 import uuid from 'uuid/v1' // Importamos v1
 
 export const ADD_TASK = 'ADD_TASK'
-export const addTask = ({title, description, time}) => ({
+export const addTask = ({title, description, time, progress = 0, finished = false, createdAt = Date.now()}) => ({
   type: ADD_TASK,
   id: uuid(),
   title,
   description,
   time,
-  progress: 0,
-  finished: false
+  progress,
+  createdAt,
+  finished
 })
 
 export const EDIT_TASK = 'EDIT_TASK'
@@ -32,15 +33,37 @@ export const finishTask = id => ({
   type: FINISH_TASK,
   id
 })
+export const UNFINISH_TASK = 'UNFINISH_TASK'
+export const unfinishTask = id => ({
+  type: UNFINISH_TASK,
+  id
+})
+
+export const MOVE_TASK_UP = 'MOVE_TASK_UP_UP'
+export const MOVE_TASK_DOWN = 'MOVE_TASK_DOWN'
+export const moveTaskUp = (id) => ({
+  type: MOVE_TASK_UP,
+  up: true,
+  id
+})
+export const moveTaskDown = (id) => ({
+  type: MOVE_TASK_DOWN,
+  up: false,
+  id
+})
 
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
+export const TOGGLE_VISIBILITY_FILTER = 'TOGGLE_VISIBILITY_FILTER'
 export const VISIBILITY_FILTERS = {
   SHOW_COMPLETED: 'SHOW_COMPLETED',
   HIDE_COMPLETED: 'HIDE_COMPLETED'
 }
 export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
+  type: SET_VISIBILITY_FILTER,
   filter
+})
+export const toggleVisibilityFilter = () => ({
+  type: TOGGLE_VISIBILITY_FILTER
 })
 
 export const START_TIMER = 'START_TIMER'

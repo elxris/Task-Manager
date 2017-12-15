@@ -47,7 +47,7 @@ const TaskMenu = ({ dispatch, classes, timer, dialog }) => {
     <Button fab color='primary' aria-label='add' className={classes.button} onClick={() => dispatch(openAddDialog())}>
       <AddIcon />
     </Button>
-    <Button fab color={timer ? 'default' : 'accent'} aria-label='add' className={classes.button} onClick={startStopTimer(dispatch, timer)}>
+    <Button fab color={timer ? 'accent' : 'primary'} aria-label='add' className={classes.button} onClick={startStopTimer(dispatch, timer)}>
       {timer ? <TimerOffIcon /> : <TimerIcon />}
     </Button>
   </div>
