@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 import { Paper, Button, Divider } from 'material-ui'
 import { MuiThemeProvider, createMuiTheme, withStyles } from 'material-ui/styles'
 import FilteredTaskList from './containers/FilteredTaskList'
 import TaskMenu from './containers/TaskMenu'
 import AddDialog from './containers/AddDialog'
+import ChartDialog from './containers/ChartDialog'
 import VisibilityFilter from './containers/VisibilityFilter'
 import DurationFilter from './containers/DurationFilter'
 import { addTask } from './actions'
@@ -26,8 +28,10 @@ const styles = theme => ({
 const mapStateToProps = state => ({})
 
 const mapDispatchToProps = dispatch => ({
+
+  // En esta función se generan las 50
   generateExampleTasks: () => {
-    const milisecondsWeek = 1000 * 60 * 60 * 24 * 7
+    const milisecondsWeek = moment().diff(moment().startOf('day').subtract(6, 'days'))
     const times = new Array(120 / 5).fill(5 * 60).map((value, index) => value + value * index)
 
     const tasks = []
@@ -55,6 +59,7 @@ class App extends Component {
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
           <AddDialog />
+          <ChartDialog />
           <Paper>
             <DurationFilter />
             <Divider />

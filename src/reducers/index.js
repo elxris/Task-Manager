@@ -3,14 +3,16 @@ import visibilityFilter from './visibilityFilter'
 import durationFilter from './durationFilter'
 import tasks from './tasks'
 import timer from './timer'
-import dialog from './dialog'
+import addDialog from './addDialog'
+import chartDialog from './chartDialog'
 
 const taskApp = combineReducers({
   timer,
   tasks,
   visibilityFilter,
   durationFilter,
-  dialog
+  addDialog,
+  chartDialog
 })
 
 export default taskApp

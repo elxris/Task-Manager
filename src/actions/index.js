@@ -109,9 +109,8 @@ export const openDeleteConfirmDialog = ({ id }) => ({
   type: OPEN_DELETE_CONFIRM_DIALOG,
   id
 })
-export const closeDeleteConfirmDialog = ({ confirm = false }) => ({
-  type: CLOSE_DELETE_CONFIRM_DIALOG,
-  confirm
+export const closeDeleteConfirmDialog = () => ({
+  type: CLOSE_DELETE_CONFIRM_DIALOG
 })
 
 export const SET_DURATION_FILTER = 'SET_DURATION_FILTER'
@@ -124,4 +123,13 @@ export const DURATION_FILTERS = {
 export const setDurationFilter = filter => ({
   type: SET_DURATION_FILTER,
   filter
+})
+
+export const OPEN_CHART_DIALOG = 'OPEN_CHART_DIALOG'
+export const CLOSE_CHART_DIALOG = 'CLOSE_CHART_DIALOG'
+export const openChartDialog = () => ({
+  type: OPEN_CHART_DIALOG
+})
+export const closeChartDialog = () => ({
+  type: CLOSE_CHART_DIALOG
 })

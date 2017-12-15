@@ -11,7 +11,7 @@ const isValidSeconds = (minutes, seconds) => ((minutes, seconds) => !isNaN(secon
 const getTime = (minutes, seconds) => ((minutes, seconds) => minutes * 60 + seconds)(parseInt(minutes, 10), parseInt(seconds, 10))
 
 const mapStateToProps = state => {
-  return Object.assign({}, state.dialog, {dialog: state.dialog})
+  return Object.assign({}, state.addDialog, {dialog: state.addDialog})
 }
 
 const mapDispatchToProps = dispatch => ({
