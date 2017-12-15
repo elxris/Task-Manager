@@ -22,8 +22,11 @@ const tasks = (state = [], action) => {
     case FINISH_TASK:
     case UNFINISH_TASK:
       item = state.find(task => task.id === id)
+      Object.assign(item, { finished: action.type === FINISH_TASK ? Date.now() : false, progress: action.type === UNFINISH_TASK && !item.finished ? 0 : item.progress })
+      if (action.type === UNFINISH_TASK && item.progress === 0 && item.finished === false) {
+        return [...state]
+      }
       state.splice(state.indexOf(item), 1)
-      Object.assign(item, { finished: action.type === FINISH_TASK ? Date.now() : false })
       tasksPending = state.filter(t => !t.finished)
       tasksFinished = state.filter(t => t.finished)
       return [].concat(tasksPending, item, tasksFinished)
