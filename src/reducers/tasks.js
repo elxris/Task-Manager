@@ -1,4 +1,5 @@
 import { ADD_TASK, EDIT_TASK, FINISH_TASK, REMOVE_TASK, ADD_TIME, MOVE_TASK_UP, MOVE_TASK_DOWN, UNFINISH_TASK } from '../actions'
+import { filterByDuration } from '../containers/FilteredTaskList'
 
 const tasks = (state = [], action) => {
   const { id, title, description, time, finished = false, progress, createdAt } = action
@@ -46,8 +47,11 @@ const tasks = (state = [], action) => {
       tasksPending.splice(oldPos + (up ? -1 : 1), 0, ...item)
       return [].concat(tasksPending, tasksFinished)
     case ADD_TIME:
+      let { durationFilter } = action
+      // Instance a function to filter all the tasks by duration
+      let filter = filterByDuration(durationFilter)
       // Busca el primer elemento de la lista que no esté terminado
-      let first = state.find(task => !task.finished)
+      let first = state.find(task => !task.finished && filter(task))
       if (!first) return state
       // El centinela me permitirá conocer si una tarea terminó
       let centinela = 0

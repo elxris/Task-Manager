@@ -5,12 +5,12 @@ import { VISIBILITY_FILTERS, DURATION_FILTERS, startTimer, stopTimer, addTime, r
 const { HIDE_COMPLETED, SHOW_COMPLETED } = VISIBILITY_FILTERS
 const { SHORT, MEDIUM, LARGE } = DURATION_FILTERS
 
-const filterByDuration = (durationFilter) => (task) => {
+export const filterByDuration = (durationFilter) => (task) => {
   switch (durationFilter) {
     case SHORT:
       return task.time <= (30 * 60)
     case MEDIUM:
-      return task.time >= (30 * 60) && task.time <= (60 * 60)
+      return task.time > (30 * 60) && task.time <= (60 * 60)
     case LARGE:
       return task.time > (60 * 60)
     default:

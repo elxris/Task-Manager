@@ -29,7 +29,7 @@ const styles = theme => ({
 })
 
 const mapStateToProps = state => ({
-  timer: !!state.timer
+  timer: !!state.timer.interval
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -43,8 +43,8 @@ const mapDispatchToProps = dispatch => ({
     if (timer) {
       dispatch(stopTimer())
     } else {
-      dispatch(startTimer(() => {
-        dispatch(addTime())
+      dispatch(startTimer((filter) => () => {
+        dispatch(addTime(filter))
       }))
     }
   }

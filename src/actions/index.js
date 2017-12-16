@@ -77,8 +77,9 @@ export const stopTimer = () => ({
 })
 
 export const ADD_TIME = 'ADD_TIME'
-export const addTime = () => ({
-  type: ADD_TIME
+export const addTime = (durationFilter) => ({
+  type: ADD_TIME,
+  durationFilter
 })
 
 export const OPEN_ADD_DIALOG = 'OPEN_ADD_DIALOG'
